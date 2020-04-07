@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module optimize_functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>optimize_functions</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/oscar/SBI_project/ComplexArchitect/CArchitect/optimize_functions.py">/home/oscar/SBI_project/ComplexArchitect/CArchitect/optimize_functions.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;In&nbsp;this&nbsp;module&nbsp;there&nbsp;are&nbsp;stored&nbsp;the&nbsp;functions&nbsp;necessary&nbsp;to&nbsp;opimize&nbsp;the&nbsp;resulting&nbsp;complex&nbsp;model&nbsp;and&nbsp;the&nbsp;energy&nbsp;plot.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="modeller.optimizers.actions.html">modeller.optimizers.actions</a><br>
+<a href="modeller.features.html">modeller.features</a><br>
+<a href="modeller.forms.html">modeller.forms</a><br>
+<a href="modeller.modfile.html">modeller.modfile</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="pandas.html">pandas</a><br>
+<a href="modeller.physical.html">modeller.physical</a><br>
+<a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+</td><td width="25%" valign=top><a href="modeller.pseudo_atom.html">modeller.pseudo_atom</a><br>
+<a href="modeller.secondary_structure.html">modeller.secondary_structure</a><br>
+<a href="sys.html">sys</a><br>
+<a href="modeller.terms.html">modeller.terms</a><br>
+</td><td width="25%" valign=top><a href="modeller.virtual_atom.html">modeller.virtual_atom</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-DOPE_comparison_plot"><strong>DOPE_comparison_plot</strong></a>(path, data_unopt, data_opt)</dt><dd><tt>Creates&nbsp;a&nbsp;DOPE&nbsp;comparison&nbsp;plot&nbsp;between&nbsp;the&nbsp;unoptimized&nbsp;and&nbsp;the&nbsp;optimized&nbsp;model.&nbsp;Reads&nbsp;the&nbsp;energy&nbsp;profile&nbsp;data&nbsp;of&nbsp;each&nbsp;model&nbsp;from&nbsp;the&nbsp;corresponding&nbsp;files&nbsp;and&nbsp;saves<br>
+the&nbsp;plot&nbsp;in&nbsp;&lt;png&gt;&nbsp;format&nbsp;in&nbsp;the&nbsp;current&nbsp;directory<br>
+&nbsp;<br>
+Keyword&nbsp;arguments<br>
+path&nbsp;--&nbsp;whole&nbsp;path&nbsp;of&nbsp;the&nbsp;resulting&nbsp;complex&nbsp;models&nbsp;with&nbsp;its&nbsp;proper&nbsp;name&nbsp;except&nbsp;the&nbsp;extension&nbsp;of&nbsp;the&nbsp;file<br>
+data_unopt&nbsp;--&nbsp;file&nbsp;with&nbsp;the&nbsp;energy&nbsp;profile&nbsp;data&nbsp;from&nbsp;the&nbsp;unoptimized&nbsp;model<br>
+data_opt&nbsp;--&nbsp;file&nbsp;with&nbsp;the&nbsp;energy&nbsp;profile&nbsp;data&nbsp;from&nbsp;the&nbsp;optimized&nbsp;model</tt></dd></dl>
+ <dl><dt><a name="-blockPrint"><strong>blockPrint</strong></a>()</dt><dd><tt>Function&nbsp;that&nbsp;blocks&nbsp;the&nbsp;printing&nbsp;to&nbsp;stdout&nbsp;in&nbsp;order&nbsp;to&nbsp;avoid&nbsp;all&nbsp;the&nbsp;additional&nbsp;data&nbsp;and&nbsp;processes&nbsp;of&nbsp;MODELLER.</tt></dd></dl>
+ <dl><dt><a name="-enablePrint"><strong>enablePrint</strong></a>()</dt><dd><tt>Function&nbsp;that&nbsp;restores&nbsp;the&nbsp;printing&nbsp;to&nbsp;stdout.</tt></dd></dl>
+ <dl><dt><a name="-optimization"><strong>optimization</strong></a>(pdb_file)</dt><dd><tt>Optimizes&nbsp;the&nbsp;stereochemistry&nbsp;of&nbsp;a&nbsp;given&nbsp;model&nbsp;saved&nbsp;in&nbsp;a&nbsp;pdb&nbsp;file,&nbsp;including&nbsp;non-bonded&nbsp;contacts.&nbsp;The&nbsp;function&nbsp;is&nbsp;derived&nbsp;from&nbsp;the&nbsp;MODELLER&nbsp;package.<br>
+It&nbsp;also&nbsp;creates&nbsp;a&nbsp;plot&nbsp;with&nbsp;a&nbsp;comparison&nbsp;of&nbsp;the&nbsp;DOPE&nbsp;of&nbsp;the&nbsp;unoptimized&nbsp;model&nbsp;vs&nbsp;the&nbsp;optimized&nbsp;model.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments<br>
+pdb_file&nbsp;--&nbsp;whole&nbsp;path&nbsp;of&nbsp;the&nbsp;resulting&nbsp;complex&nbsp;model&nbsp;in&nbsp;pdb&nbsp;format.&nbsp;It&nbsp;includes&nbsp;the&nbsp;directory&nbsp;where&nbsp;it&nbsp;is&nbsp;stored.<br>
+&nbsp;<br>
+Considerations:<br>
+get_dope_profile()&nbsp;function:&nbsp;returns&nbsp;the&nbsp;individual&nbsp;residue&nbsp;components&nbsp;of&nbsp;the&nbsp;DOPE&nbsp;score,&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;detect&nbsp;poor&nbsp;regions&nbsp;of&nbsp;the&nbsp;model.<br>
+get_smoothed()&nbsp;function:&nbsp;modifies&nbsp;the&nbsp;resulting&nbsp;energy&nbsp;profile.&nbsp;Each&nbsp;residue's&nbsp;energy&nbsp;is&nbsp;smoothed&nbsp;by&nbsp;weighted&nbsp;window&nbsp;averaging,&nbsp;using&nbsp;its&nbsp;own&nbsp;energy&nbsp;and&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;energy&nbsp;of&nbsp;window&nbsp;residues&nbsp;either&nbsp;side&nbsp;of&nbsp;it;&nbsp;energies&nbsp;of&nbsp;residues&nbsp;are&nbsp;weighted&nbsp;by&nbsp;how&nbsp;close&nbsp;they&nbsp;are&nbsp;to&nbsp;the&nbsp;center&nbsp;residue&nbsp;in&nbsp;sequence.<br>
+The&nbsp;model&nbsp;is&nbsp;refined&nbsp;using&nbsp;conjugate&nbsp;gradients.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>info</strong> = &lt;modeller.information.Information object&gt;<br>
+<strong>log</strong> = &lt;modeller.util.logger.Logger object&gt;</td></tr></table>
+</body></html>

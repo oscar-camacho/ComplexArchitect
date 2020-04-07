@@ -1,0 +1,2 @@
+Stoichiometry of 5nss:
+A:6,B:1,C:1,D:2,E:1,F:1,G:1,H:1

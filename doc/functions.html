@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>functions</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/oscar/SBI_project/ComplexArchitect/CArchitect/functions.py">/home/oscar/SBI_project/ComplexArchitect/CArchitect/functions.py</a></font></td></tr></table>
+    <p><tt>#In&nbsp;this&nbsp;module&nbsp;there&nbsp;are&nbsp;stored&nbsp;the&nbsp;functions&nbsp;required&nbsp;to&nbsp;run&nbsp;the&nbsp;application.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Bio.PDB.html">Bio.PDB</a><br>
+<a href="Bio.SeqIO.html">Bio.SeqIO</a><br>
+<a href="modeller.optimizers.actions.html">modeller.optimizers.actions</a><br>
+<a href="copy.html">copy</a><br>
+<a href="modeller.features.html">modeller.features</a><br>
+</td><td width="25%" valign=top><a href="modeller.forms.html">modeller.forms</a><br>
+<a href="modeller.modfile.html">modeller.modfile</a><br>
+<a href="os.html">os</a><br>
+<a href="Bio.pairwise2.html">Bio.pairwise2</a><br>
+<a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top><a href="modeller.physical.html">modeller.physical</a><br>
+<a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+<a href="modeller.pseudo_atom.html">modeller.pseudo_atom</a><br>
+<a href="random.html">random</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="modeller.secondary_structure.html">modeller.secondary_structure</a><br>
+<a href="sys.html">sys</a><br>
+<a href="modeller.terms.html">modeller.terms</a><br>
+<a href="utilities.html">utilities</a><br>
+<a href="modeller.virtual_atom.html">modeller.virtual_atom</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-complex_builder"><strong>complex_builder</strong></a>(interaction_dict, pdb_models, num_models, max_chains, stoich_dict, clash_dist, verbose)</dt><dd><tt>Function&nbsp;that&nbsp;iteratively&nbsp;builds&nbsp;a&nbsp;macrocomplex&nbsp;model&nbsp;from&nbsp;the&nbsp;pairs&nbsp;of&nbsp;interactions.<br>
+First,&nbsp;it&nbsp;selects&nbsp;the&nbsp;starting&nbsp;pair&nbsp;of&nbsp;interacting&nbsp;chains&nbsp;of&nbsp;the&nbsp;macrocomplex.&nbsp;From&nbsp;that,&nbsp;the&nbsp;chains&nbsp;of&nbsp;the&nbsp;macrocomplex&nbsp;are&nbsp;being&nbsp;iterated&nbsp;looking&nbsp;for&nbsp;possible<br>
+interactions&nbsp;according&nbsp;to&nbsp;the&nbsp;interaction&nbsp;dictionary.&nbsp;If&nbsp;it&nbsp;does&nbsp;not&nbsp;encounter&nbsp;clashes,&nbsp;the&nbsp;two&nbsp;chains&nbsp;that&nbsp;are&nbsp;equivalent&nbsp;superimpose,&nbsp;resulting&nbsp;in&nbsp;the&nbsp;addition&nbsp;of&nbsp;the<br>
+other&nbsp;interacting&nbsp;chain&nbsp;to&nbsp;the&nbsp;complex.&nbsp;That&nbsp;specific&nbsp;model&nbsp;of&nbsp;interacting&nbsp;chains&nbsp;is&nbsp;removed&nbsp;from&nbsp;a&nbsp;list&nbsp;of&nbsp;pending&nbsp;interactions,&nbsp;since&nbsp;it&nbsp;is&nbsp;already&nbsp;added.&nbsp;If&nbsp;clashes&nbsp;are&nbsp;found,<br>
+the&nbsp;model&nbsp;is&nbsp;not&nbsp;added,&nbsp;waiting.&nbsp;Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;resulting&nbsp;macrocomplex&nbsp;models.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+interaction_dict&nbsp;--&nbsp;dictionary&nbsp;of&nbsp;tuples&nbsp;with&nbsp;the&nbsp;possible&nbsp;interactions&nbsp;a&nbsp;given&nbsp;chain&nbsp;can&nbsp;perform.<br>
+pdb_models&nbsp;--&nbsp;PDB&nbsp;models&nbsp;containing&nbsp;chains&nbsp;with&nbsp;unified&nbsp;IDs&nbsp;according&nbsp;to&nbsp;sequence&nbsp;similarity<br>
+num_models&nbsp;--&nbsp;maximum&nbsp;number&nbsp;of&nbsp;models&nbsp;the&nbsp;function&nbsp;is&nbsp;going&nbsp;to&nbsp;produce<br>
+max_chains&nbsp;--&nbsp;maximum&nbsp;number&nbsp;of&nbsp;chains&nbsp;allowed&nbsp;in&nbsp;the&nbsp;models<br>
+stoich_dict&nbsp;--&nbsp;dictionary&nbsp;with&nbsp;the&nbsp;stoichiometry&nbsp;specified&nbsp;by&nbsp;the&nbsp;user<br>
+clash_dist&nbsp;--&nbsp;minimum&nbsp;clash&nbsp;distance&nbsp;between&nbsp;2&nbsp;atoms.&nbsp;The&nbsp;default&nbsp;minimum&nbsp;is&nbsp;2&nbsp;A<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program<br>
+&nbsp;<br>
+Considerations:<br>
+Through&nbsp;all&nbsp;the&nbsp;process,&nbsp;the&nbsp;current&nbsp;stoichiometry&nbsp;of&nbsp;the&nbsp;building&nbsp;complex&nbsp;is&nbsp;analyzed.&nbsp;If&nbsp;a&nbsp;specific&nbsp;stoichiometry&nbsp;is&nbsp;provided,&nbsp;that&nbsp;is&nbsp;compared&nbsp;with&nbsp;the&nbsp;one&nbsp;of&nbsp;the&nbsp;macrocomplex.<br>
+If&nbsp;the&nbsp;stoichiometry&nbsp;is&nbsp;fulfilled,&nbsp;the&nbsp;process&nbsp;stops.<br>
+If&nbsp;there&nbsp;are&nbsp;no&nbsp;possible&nbsp;interactions&nbsp;left,&nbsp;the&nbsp;process&nbsp;stops.<br>
+If&nbsp;the&nbsp;maximum&nbsp;number&nbsp;of&nbsp;chains&nbsp;is&nbsp;overpassed,&nbsp;the&nbsp;process&nbsp;stops.<br>
+If&nbsp;no&nbsp;chains&nbsp;are&nbsp;added&nbsp;to&nbsp;complex&nbsp;during&nbsp;three&nbsp;iterations&nbsp;through&nbsp;the&nbsp;chains,&nbsp;the&nbsp;process&nbsp;stops</tt></dd></dl>
+ <dl><dt><a name="-data_extraction"><strong>data_extraction</strong></a>(directory, fasta_file, verbose=False)</dt><dd><tt>Takes&nbsp;a&nbsp;directory&nbsp;with&nbsp;PDB&nbsp;files,&nbsp;generates&nbsp;PDB&nbsp;objects&nbsp;of&nbsp;the&nbsp;models&nbsp;for&nbsp;each&nbsp;file&nbsp;and&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;PDB&nbsp;models.<br>
+It&nbsp;also&nbsp;checks&nbsp;if&nbsp;the&nbsp;FASTA&nbsp;file,&nbsp;if&nbsp;provided,&nbsp;exists.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+directory&nbsp;--&nbsp;path&nbsp;of&nbsp;the&nbsp;directory&nbsp;where&nbsp;the&nbsp;PDB&nbsp;files&nbsp;are<br>
+fasta_file&nbsp;--&nbsp;FASTA&nbsp;file&nbsp;with&nbsp;the&nbsp;non-repeated&nbsp;sequences&nbsp;of&nbsp;the&nbsp;chains&nbsp;that&nbsp;conform&nbsp;the&nbsp;complex.<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program<br>
+&nbsp;<br>
+Exceptions&nbsp;raised:<br>
+Directory_Not_Found&nbsp;--&nbsp;raised&nbsp;if&nbsp;name&nbsp;of&nbsp;the&nbsp;directory&nbsp;does&nbsp;not&nbsp;exist<br>
+No_Input_Directory_Provided&nbsp;--&nbsp;raised&nbsp;if&nbsp;directory&nbsp;is&nbsp;no&nbsp;provided<br>
+No_PDB_Found&nbsp;--&nbsp;raised&nbsp;if&nbsp;directory&nbsp;does&nbsp;not&nbsp;contain&nbsp;PDB&nbsp;files<br>
+Incorrect_Number_Chains&nbsp;--&nbsp;raised&nbsp;if&nbsp;a&nbsp;PDB&nbsp;object&nbsp;contains&nbsp;more&nbsp;than&nbsp;2&nbsp;chains<br>
+FASTA_Not_Found&nbsp;--&nbsp;raised&nbsp;if&nbsp;name&nbsp;of&nbsp;the&nbsp;FASTA&nbsp;file&nbsp;does&nbsp;not&nbsp;exist</tt></dd></dl>
+ <dl><dt><a name="-data_transformation"><strong>data_transformation</strong></a>(pdb_models, verbose)</dt><dd><tt>Transforms&nbsp;and&nbsp;aggregates&nbsp;the&nbsp;information&nbsp;of&nbsp;the&nbsp;PDB&nbsp;models&nbsp;in&nbsp;order&nbsp;to&nbsp;be&nbsp;more&nbsp;easy&nbsp;to&nbsp;get&nbsp;access&nbsp;to&nbsp;it.<br>
+Takes&nbsp;the&nbsp;list&nbsp;of&nbsp;PDB&nbsp;models&nbsp;with&nbsp;the&nbsp;unified&nbsp;IDs&nbsp;according&nbsp;to&nbsp;sequence&nbsp;cimilarity&nbsp;and&nbsp;returns&nbsp;a&nbsp;dictionary&nbsp;where&nbsp;keys&nbsp;are&nbsp;the&nbsp;unique&nbsp;IDs&nbsp;that&nbsp;share&nbsp;some&nbsp;chains&nbsp;after&nbsp;getting<br>
+unified&nbsp;by&nbsp;them&nbsp;and&nbsp;values&nbsp;are&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;with&nbsp;information&nbsp;related&nbsp;to&nbsp;the&nbsp;chains&nbsp;that&nbsp;have&nbsp;that&nbsp;ID.&nbsp;The&nbsp;tuple&nbsp;consists&nbsp;on&nbsp;the&nbsp;model&nbsp;object&nbsp;that&nbsp;contains&nbsp;the&nbsp;chain&nbsp;with&nbsp;the&nbsp;specified&nbsp;ID&nbsp;and<br>
+its&nbsp;interacting&nbsp;chain,&nbsp;the&nbsp;chain&nbsp;object&nbsp;that&nbsp;has&nbsp;the&nbsp;specified&nbsp;ID&nbsp;and&nbsp;the&nbsp;other&nbsp;chain&nbsp;object&nbsp;from&nbsp;the&nbsp;one&nbsp;(the&nbsp;one&nbsp;that&nbsp;interacts&nbsp;with&nbsp;the&nbsp;chain&nbsp;with&nbsp;the&nbsp;specified&nbsp;ID).<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&gt;&nbsp;[(&lt;Model&nbsp;id=0&gt;,&nbsp;&lt;Chain&nbsp;id=A&gt;,&nbsp;&lt;Chain&nbsp;id=A&gt;),&nbsp;(&lt;Model&nbsp;id=1&gt;,&nbsp;&lt;Chain&nbsp;id=A&gt;,&nbsp;&lt;Chain&nbsp;id=A&gt;),&nbsp;(&lt;Model&nbsp;id=2&gt;,&nbsp;&lt;Chain&nbsp;id=A&gt;,&nbsp;&lt;Chain&nbsp;id=B&gt;)]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&gt;&nbsp;[(&lt;Model&nbsp;id=0&gt;,&nbsp;&lt;Chain&nbsp;id=B&gt;,&nbsp;&lt;Chain&nbsp;id=A&gt;),&nbsp;(&lt;Model&nbsp;id=2&gt;,&nbsp;&lt;Chain&nbsp;id=B&gt;,&nbsp;&lt;Chain&nbsp;id=B&gt;)]<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+pdb_models&nbsp;--&nbsp;PDB&nbsp;models&nbsp;containing&nbsp;chains&nbsp;with&nbsp;unified&nbsp;IDs&nbsp;according&nbsp;to&nbsp;sequence&nbsp;similarity<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program</tt></dd></dl>
+ <dl><dt><a name="-find_equivalent_chains"><strong>find_equivalent_chains</strong></a>(pdb_models, fasta_file, verbose=False)</dt><dd><tt>Updates&nbsp;original&nbsp;PDB&nbsp;models&nbsp;to&nbsp;customized&nbsp;PDB&nbsp;models&nbsp;and&nbsp;return&nbsp;the&nbsp;list&nbsp;of&nbsp;those.&nbsp;Unifies&nbsp;the&nbsp;ID&nbsp;chains&nbsp;in&nbsp;a&nbsp;way&nbsp;that&nbsp;those&nbsp;chains&nbsp;with&nbsp;sequences<br>
+that&nbsp;are&nbsp;very&nbsp;similar&nbsp;or&nbsp;identical&nbsp;(equivalent&nbsp;chains)&nbsp;receive&nbsp;the&nbsp;same&nbsp;ID.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+pdb_models&nbsp;--&nbsp;list&nbsp;of&nbsp;objects&nbsp;of&nbsp;the&nbsp;PDB&nbsp;models&nbsp;with&nbsp;2&nbsp;interacting&nbsp;chains,&nbsp;extracted&nbsp;from&nbsp;the&nbsp;PDB&nbsp;files<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program<br>
+&nbsp;<br>
+Considerations:&nbsp;the&nbsp;function&nbsp;works&nbsp;in&nbsp;two&nbsp;different&nbsp;scenarios.<br>
+FASTA&nbsp;file&nbsp;is&nbsp;provided&nbsp;--&nbsp;pairwise&nbsp;alignments&nbsp;between&nbsp;chain&nbsp;sequences&nbsp;and&nbsp;FASTA&nbsp;sequences&nbsp;are&nbsp;performed.&nbsp;If&nbsp;they&nbsp;are&nbsp;equivalent,&nbsp;the&nbsp;chain&nbsp;receives&nbsp;the&nbsp;ID&nbsp;from&nbsp;the&nbsp;FASTA&nbsp;sequence.<br>
+FASTA&nbsp;file&nbsp;is&nbsp;not&nbsp;provided&nbsp;--&nbsp;pairwise&nbsp;alignments&nbsp;are&nbsp;performed&nbsp;between&nbsp;the&nbsp;chain&nbsp;sequences.&nbsp;Unique&nbsp;chains&nbsp;are&nbsp;identified&nbsp;and&nbsp;those&nbsp;chains&nbsp;that&nbsp;are&nbsp;equivalent&nbsp;share&nbsp;the&nbsp;same&nbsp;ID.</tt></dd></dl>
+ <dl><dt><a name="-get_model_stoichiometry"><strong>get_model_stoichiometry</strong></a>(model)</dt><dd><tt>Generates&nbsp;a&nbsp;dictionary&nbsp;with&nbsp;the&nbsp;id&nbsp;chain&nbsp;as&nbsp;key&nbsp;and&nbsp;the&nbsp;number&nbsp;of&nbsp;repetitions&nbsp;of&nbsp;this&nbsp;chain&nbsp;as&nbsp;values.&nbsp;Returns&nbsp;the&nbsp;stoichiometry&nbsp;dictionary&nbsp;for&nbsp;the<br>
+macrocomplex&nbsp;mmodel&nbsp;in&nbsp;construction.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments<br>
+model&nbsp;--&nbsp;macrocomplex&nbsp;model&nbsp;that&nbsp;is&nbsp;in&nbsp;construction&nbsp;process</tt></dd></dl>
+ <dl><dt><a name="-get_stoich_without_fasta"><strong>get_stoich_without_fasta</strong></a>(pdb_models)</dt><dd><tt>Alternative&nbsp;function&nbsp;that&nbsp;asks&nbsp;for&nbsp;the&nbsp;stoichiometry&nbsp;of&nbsp;the&nbsp;complex&nbsp;and&nbsp;return&nbsp;a&nbsp;stoichiometry&nbsp;dictionary.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments<br>
+pdb_models&nbsp;--&nbsp;PDB&nbsp;models&nbsp;containing&nbsp;chains&nbsp;with&nbsp;unified&nbsp;IDs&nbsp;according&nbsp;to&nbsp;sequence&nbsp;similarity<br>
+Considerations:&nbsp;If&nbsp;the&nbsp;user&nbsp;does&nbsp;not&nbsp;provide&nbsp;a&nbsp;FASTA&nbsp;file,&nbsp;probably&nbsp;can&nbsp;not&nbsp;identify&nbsp;the&nbsp;working&nbsp;sequences&nbsp;to&nbsp;add&nbsp;a&nbsp;stoichiometry.&nbsp;Then&nbsp;the&nbsp;function&nbsp;shows<br>
+the&nbsp;sequences&nbsp;of&nbsp;the&nbsp;unique&nbsp;chains&nbsp;with&nbsp;its&nbsp;corresponding&nbsp;generated&nbsp;IDs&nbsp;and&nbsp;asks&nbsp;for&nbsp;the&nbsp;stoichiometry&nbsp;taking&nbsp;into&nbsp;account&nbsp;the&nbsp;given&nbsp;IDs.</tt></dd></dl>
+ <dl><dt><a name="-get_stoichiometry"><strong>get_stoichiometry</strong></a>(stoich_string)</dt><dd><tt>Transforms&nbsp;a&nbsp;string&nbsp;containing&nbsp;the&nbsp;stoichiometry&nbsp;of&nbsp;the&nbsp;complex&nbsp;given&nbsp;by&nbsp;the&nbsp;user&nbsp;into&nbsp;a&nbsp;dictionary&nbsp;where&nbsp;keys&nbsp;are&nbsp;the&nbsp;chain&nbsp;IDs&nbsp;and&nbsp;values<br>
+are&nbsp;the&nbsp;number&nbsp;of&nbsp;times&nbsp;the&nbsp;chain&nbsp;has&nbsp;to&nbsp;be&nbsp;present&nbsp;in&nbsp;the&nbsp;complex.&nbsp;Returns&nbsp;the&nbsp;stoichiometry&nbsp;dictionary.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments<br>
+stoich_string&nbsp;--&nbsp;desired&nbsp;stoichiometry&nbsp;for&nbsp;the&nbsp;complex&nbsp;given&nbsp;by&nbsp;the&nbsp;user&nbsp;as&nbsp;a&nbsp;string<br>
+Exceptions:<br>
+ValueError:&nbsp;if&nbsp;the&nbsp;format&nbsp;of&nbsp;the&nbsp;stoichiometry&nbsp;string&nbsp;is&nbsp;incorrect,&nbsp;prints&nbsp;a&nbsp;message&nbsp;and&nbsp;exits&nbsp;the&nbsp;program.</tt></dd></dl>
+ <dl><dt><a name="-get_unique_chains"><strong>get_unique_chains</strong></a>(pdb_models)</dt><dd><tt>Collects&nbsp;all&nbsp;the&nbsp;chains&nbsp;with&nbsp;unified&nbsp;IDs&nbsp;from&nbsp;the&nbsp;models&nbsp;and&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;unique&nbsp;chains&nbsp;formed&nbsp;only&nbsp;by&nbsp;a&nbsp;signle&nbsp;representant&nbsp;of&nbsp;the&nbsp;chains&nbsp;that&nbsp;shares&nbsp;a&nbsp;specific&nbsp;ID.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments<br>
+pdb_models&nbsp;--&nbsp;PDB&nbsp;models&nbsp;containing&nbsp;chains&nbsp;with&nbsp;unified&nbsp;IDs.</tt></dd></dl>
+ <dl><dt><a name="-has_clashes"><strong>has_clashes</strong></a>(move_atoms, model, clash_dist)</dt><dd><tt>Compares&nbsp;the&nbsp;backbone&nbsp;atoms&nbsp;of&nbsp;the&nbsp;moving&nbsp;chain&nbsp;with&nbsp;the&nbsp;backbone&nbsp;atoms&nbsp;of&nbsp;the&nbsp;model.&nbsp;Returns&nbsp;a&nbsp;boolean&nbsp;value&nbsp;based&nbsp;on&nbsp;the&nbsp;presence&nbsp;and&nbsp;abundancy&nbsp;of&nbsp;clashes.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+move_atoms&nbsp;--&nbsp;set&nbsp;of&nbsp;atoms&nbsp;from&nbsp;the&nbsp;chain&nbsp;that&nbsp;is&nbsp;potentially&nbsp;going&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;macrocomplex<br>
+model&nbsp;--&nbsp;current&nbsp;macrocomplex&nbsp;model&nbsp;in&nbsp;construction<br>
+clas_dist&nbsp;--&nbsp;minimum&nbsp;clash&nbsp;distance&nbsp;between&nbsp;2&nbsp;atoms.&nbsp;The&nbsp;default&nbsp;minimum&nbsp;is&nbsp;2&nbsp;A<br>
+&nbsp;<br>
+Considerations:<br>
+Alpha&nbsp;carbons&nbsp;are&nbsp;used&nbsp;as&nbsp;backbone&nbsp;atoms.<br>
+Threshold:&nbsp;if&nbsp;3%&nbsp;of&nbsp;atoms&nbsp;of&nbsp;the&nbsp;chain&nbsp;that&nbsp;is&nbsp;been&nbsp;comparing&nbsp;to&nbsp;the&nbsp;model&nbsp;shows&nbsp;clashes,&nbsp;&lt;True&gt;&nbsp;is&nbsp;returned.&nbsp;Hence,&nbsp;that&nbsp;chain&nbsp;won't&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;model.</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>(input, output, fasta, stoichiometry, model_num, chains, clash_dist, optimize, verbose)</dt><dd><tt>Main&nbsp;function&nbsp;of&nbsp;the&nbsp;program&nbsp;that&nbsp;includes&nbsp;all&nbsp;the&nbsp;essential&nbsp;processes.&nbsp;It&nbsp;extracts&nbsp;the&nbsp;information&nbsp;from&nbsp;the&nbsp;input&nbsp;files&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;PDB&nbsp;model&nbsp;objects.<br>
+If&nbsp;stoichiometry&nbsp;is&nbsp;provided&nbsp;in&nbsp;the&nbsp;command&nbsp;line,&nbsp;it&nbsp;gets&nbsp;it&nbsp;directly&nbsp;from&nbsp;there.&nbsp;PDB&nbsp;model&nbsp;objects&nbsp;are&nbsp;updated,&nbsp;being&nbsp;unified&nbsp;the&nbsp;IDs&nbsp;of&nbsp;the&nbsp;chains&nbsp;according&nbsp;to&nbsp;their<br>
+similarity&nbsp;(equivalence).&nbsp;If&nbsp;no&nbsp;FASTA&nbsp;input&nbsp;nor&nbsp;stoichiometry&nbsp;provided,&nbsp;it&nbsp;asks&nbsp;again&nbsp;for&nbsp;the&nbsp;stoichiometry&nbsp;in&nbsp;case&nbsp;the&nbsp;user&nbsp;wants&nbsp;to&nbsp;specify&nbsp;it.&nbsp;Information&nbsp;from&nbsp;model&nbsp;objects&nbsp;is<br>
+reestructured&nbsp;in&nbsp;an&nbsp;interaction&nbsp;dictionary&nbsp;taking&nbsp;into&nbsp;account&nbsp;the&nbsp;equivalences&nbsp;between&nbsp;chains.&nbsp;"complex_builder"&nbsp;function&nbsp;builds&nbsp;possible&nbsp;commplexes&nbsp;from&nbsp;the&nbsp;information<br>
+of&nbsp;the&nbsp;different&nbsp;pairs&nbsp;of&nbsp;interactions,&nbsp;specifying&nbsp;different&nbsp;types&nbsp;of&nbsp;parameters.&nbsp;Each&nbsp;resulting&nbsp;complex&nbsp;model&nbsp;is&nbsp;saved&nbsp;in&nbsp;PDB&nbsp;format&nbsp;in&nbsp;a&nbsp;specific&nbsp;directory&nbsp;with&nbsp;output&nbsp;name&nbsp;given.<br>
+Finally,&nbsp;if&nbsp;the&nbsp;user&nbsp;chooses&nbsp;to&nbsp;optimize&nbsp;the&nbsp;models,&nbsp;they&nbsp;are&nbsp;refined&nbsp;with&nbsp;MODELLER&nbsp;tools&nbsp;and&nbsp;a&nbsp;DOPE&nbsp;plot&nbsp;comparison&nbsp;between&nbsp;the&nbsp;unoptimized&nbsp;and&nbsp;optimized&nbsp;model&nbsp;is&nbsp;made.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments&nbsp;(all&nbsp;correspond&nbsp;to&nbsp;command&nbsp;line&nbsp;arguments)<br>
+input&nbsp;--&nbsp;input&nbsp;directory&nbsp;where&nbsp;PDB&nbsp;files&nbsp;with&nbsp;the&nbsp;pair&nbsp;interactions&nbsp;are&nbsp;located.<br>
+output&nbsp;--&nbsp;name&nbsp;of&nbsp;the&nbsp;output&nbsp;file.&nbsp;No&nbsp;extension&nbsp;is&nbsp;needed.<br>
+fasta&nbsp;--&nbsp;FASTA&nbsp;file&nbsp;with&nbsp;the&nbsp;sequences&nbsp;of&nbsp;the&nbsp;chains&nbsp;that&nbsp;will&nbsp;conform&nbsp;the&nbsp;macrocomplex.<br>
+stoichiometry&nbsp;--&nbsp;desired&nbsp;stoichiometry&nbsp;of&nbsp;the&nbsp;resulting&nbsp;complex.<br>
+model_num&nbsp;--&nbsp;maximum&nbsp;number&nbsp;of&nbsp;models&nbsp;the&nbsp;program&nbsp;is&nbsp;going&nbsp;to&nbsp;build<br>
+chains&nbsp;--&nbsp;maximum&nbsp;number&nbsp;of&nbsp;chains&nbsp;that&nbsp;the&nbsp;resulting&nbsp;model&nbsp;complex&nbsp;is&nbsp;going&nbsp;to&nbsp;have<br>
+clash_dist&nbsp;--&nbsp;minimum&nbsp;clash&nbsp;distance&nbsp;between&nbsp;2&nbsp;atoms.&nbsp;The&nbsp;default&nbsp;minimum&nbsp;is&nbsp;2&nbsp;A<br>
+optimize&nbsp;--&nbsp;boolean,&nbsp;refines&nbsp;the&nbsp;resulting&nbsp;model&nbsp;complexes&nbsp;and&nbsp;creates&nbsp;a&nbsp;DOPE&nbsp;plot&nbsp;comparison&nbsp;between&nbsp;the&nbsp;unoptimized&nbsp;and&nbsp;the&nbsp;optimized&nbsp;model<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program</tt></dd></dl>
+ <dl><dt><a name="-new_id"><strong>new_id</strong></a>(id_list)</dt><dd><tt>Checks&nbsp;for&nbsp;characters&nbsp;in&nbsp;an&nbsp;ASCII&nbsp;characters&nbsp;set&nbsp;that&nbsp;are&nbsp;not&nbsp;in&nbsp;a&nbsp;given&nbsp;list&nbsp;of&nbsp;IDs.&nbsp;Returns&nbsp;a&nbsp;new&nbsp;character&nbsp;that&nbsp;will&nbsp;serve&nbsp;as&nbsp;chain&nbsp;ID.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+id_list&nbsp;--&nbsp;list&nbsp;of&nbsp;chain&nbsp;IDs&nbsp;that&nbsp;is&nbsp;progressively&nbsp;being&nbsp;apdated</tt></dd></dl>
+ <dl><dt><a name="-save_results"><strong>save_results</strong></a>(out_models, output, directory, verbose)</dt><dd><tt>Saves&nbsp;the&nbsp;resulting&nbsp;models&nbsp;into&nbsp;PDB&nbsp;files.&nbsp;Creates&nbsp;a&nbsp;specific&nbsp;directory&nbsp;for&nbsp;the&nbsp;model&nbsp;if&nbsp;it&nbsp;does&nbsp;not&nbsp;exist.<br>
+Additionally,&nbsp;each&nbsp;chain&nbsp;receives&nbsp;a&nbsp;new&nbsp;ID&nbsp;in&nbsp;order&nbsp;to&nbsp;distinguish&nbsp;those&nbsp;chains&nbsp;that&nbsp;were&nbsp;equivalent.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+out_models&nbsp;--&nbsp;list&nbsp;of&nbsp;the&nbsp;resulting&nbsp;model&nbsp;objects&nbsp;created&nbsp;by&nbsp;the&nbsp;program<br>
+output&nbsp;--&nbsp;name&nbsp;of&nbsp;the&nbsp;output&nbsp;model/file&nbsp;given&nbsp;by&nbsp;the&nbsp;user<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program</tt></dd></dl>
+ <dl><dt><a name="-starting_model"><strong>starting_model</strong></a>(pdb_models, verbose)</dt><dd><tt>Counts&nbsp;the&nbsp;number&nbsp;of&nbsp;times&nbsp;a&nbsp;specific&nbsp;unique&nbsp;chain&nbsp;is&nbsp;present&nbsp;in&nbsp;the&nbsp;set&nbsp;of&nbsp;PDB&nbsp;models.&nbsp;According&nbsp;to&nbsp;that&nbsp;frequency,&nbsp;scores&nbsp;the&nbsp;different&nbsp;models&nbsp;inferating<br>
+which&nbsp;would&nbsp;be&nbsp;the&nbsp;model&nbsp;with&nbsp;more&nbsp;possible&nbsp;interactions,&nbsp;becoming&nbsp;the&nbsp;starting&nbsp;model&nbsp;of&nbsp;the&nbsp;complex&nbsp;in&nbsp;construction.<br>
+If&nbsp;there&nbsp;is&nbsp;more&nbsp;than&nbsp;one&nbsp;model&nbsp;with&nbsp;maximum&nbsp;possible&nbsp;interactions,&nbsp;the&nbsp;starting&nbsp;model&nbsp;is&nbsp;randomly&nbsp;selected&nbsp;among&nbsp;the&nbsp;best&nbsp;ones.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+pdb_models&nbsp;--&nbsp;PDB&nbsp;models&nbsp;containing&nbsp;chains&nbsp;with&nbsp;unified&nbsp;IDs&nbsp;according&nbsp;to&nbsp;sequence&nbsp;similarity<br>
+verbose&nbsp;--&nbsp;boolean,&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;the&nbsp;progress&nbsp;of&nbsp;the&nbsp;program</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>info</strong> = &lt;modeller.information.Information object&gt;<br>
+<strong>log</strong> = &lt;modeller.util.logger.Logger object&gt;</td></tr></table>
+</body></html>
